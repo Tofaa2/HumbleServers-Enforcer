@@ -1,12 +1,23 @@
-# HumbleServers Enforcer
- The base discord bot used for tickets in HumbleServers
 
 ## Table of Contents
-
-- [About](#installation)
+- [About](#about)
+- [Installation](#installation)
 - [Configuration](#configuration)
 - [Contributing](#how-to-contribute)
 - [License](#license)
+
+# About <a name = about>
+This is the main HumbleServers Enforcer Discord bot repository.
+This bot contains the following features:
+
+> * Logging
+> * Tickets System
+> * Moderation
+> * Aikar's timings parser
+
+The bot is completely written in TypeScript and uses the [discord.js](https://discord.js.org) library.
+If there are feature requests, please open an issue.
+
 
 # Installation (Requires NodeJS 16+) <a name = installation>
 > * Clone the repo
