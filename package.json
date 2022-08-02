@@ -1,0 +1,30 @@
+{
+  "name": "humbleservers-enforcer",
+  "version": "1.0.0",
+  "description": "The base discord bot used for tickets in HumbleServers",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tofaa2/HumbleServers-Enforcer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tofaa2/HumbleServers-Enforcer/issues"
+  },
+  "homepage": "https://github.com/Tofaa2/HumbleServers-Enforcer#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "discord.js": "^14.1.2",
+    "events": "^3.3.0",
+    "glob": "^8.0.3",
+    "util": "^0.12.4"
+  }
+}
