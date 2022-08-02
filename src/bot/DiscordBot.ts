@@ -1,16 +1,18 @@
 import { Client, Collection } from "discord.js";
 import fs from "fs";
+import * as configuration from "./configuration.json" 
 
 class DiscordBot extends Client{
 
     public commands = new Collection();
     public events = new Collection();
+    public config = configuration;
+
 
     constructor() {
         super({
-            intents: 32767,
-        });
-        
+            intents: 32767, 
+        }); 
         this.login(process.env.DISCORD_TOKEN);
     }
 }
