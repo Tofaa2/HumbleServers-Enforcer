@@ -4,14 +4,16 @@ import { token } from "../token";
 import Logger from "../utils/Logger";
 import * as configuration from "./configuration.json" 
 import * as path from "path";
+import DiscordEventEmiter from "./DiscordEventEmiter";
 
 class DiscordBot extends Client{
 
     public commands = new Collection();
+    public eventHandler: DiscordEventEmiter = new DiscordEventEmiter(this);
     public config = configuration;
     public guild: Guild | undefined;
     public logChannel: TextChannel | undefined;
-    public logger: Logger | undefined;
+    public logger: Logger = new Logger();
 
     constructor() {
         super({intents: 32767});
@@ -21,7 +23,7 @@ class DiscordBot extends Client{
             this.guild = this.guilds.cache.get(this.config.guild_id);
             if (!this.guild?.channels.cache.get(this.config.log_channel_id)?.isTextBased) throw new Error("Log channel is not a text channel");
             this.logChannel = this.guild?.channels.cache.get(this.config.log_channel_id) as TextChannel;
-            this.logger = new Logger(this.logChannel);
+            this.logger.setLogChannel(this.logChannel);
             this.logger.info(`Client has started up!`);
             
             // Event Manager
@@ -31,17 +33,10 @@ class DiscordBot extends Client{
             listeners.forEach(file => {
                 const eventPath = __dirname + "/events/" + file;
                 const event = require(eventPath);
-                if (event.once) {
-                    this.once(event.name, (...args) => event.execute(...args, this));
-                }
-                else {
-                    this.on(event.name, (...args) => event.execute(...args, this));
-                }
-                allListeners.push(event.name);
+                this.eventHandler.addListener(event.type, (...args: any[]) => event.execute(...args, this));
+                allListeners.push(event.type);
             })
             this.logger.info(`Loaded ${allListeners.length} listeners: ${allListeners.join(", ")}`);
-
-            
         });
     }
 

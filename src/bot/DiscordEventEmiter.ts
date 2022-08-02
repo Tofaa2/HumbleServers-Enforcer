@@ -8,16 +8,18 @@ class DiscordEventEmiter extends EventEmitter {
         super();
 
         client.on('messageCreate', message => this.onMessageCreate(message));
-        client.on('interactionCreate', interaction => this.onInteractionCreate(interaction))
+        client.on('interactionCreate', interaction => this.onInteractionCreate(interaction));
     }
 
-
-    async onMessageCreate(message: Message) {
+    async addEventListener(event: DiscordEvents, listener: (...args: any[]) => void) {
+        this.addListener(event, listener);
+    }
+    private async onMessageCreate(message: Message) {
         if (message.author.bot) return;
         this.emit('messageCreate', message);
     }
 
-    async onInteractionCreate(interaction: Interaction) {
+    private async onInteractionCreate(interaction: Interaction) {
         if (interaction.isCommand()) {
             this.emit('commandInteraction', interaction);
         }
@@ -32,3 +34,12 @@ class DiscordEventEmiter extends EventEmitter {
 
 
 }
+
+enum DiscordEvents {
+    MESSAGE_CREATE = "messageCreate",
+    COMMAND_INTERACTION = "commandInteraction",
+    BUTTON_INTERACTION = "buttonInteraction"
+}
+
+export default DiscordEventEmiter;
+export { DiscordEvents };

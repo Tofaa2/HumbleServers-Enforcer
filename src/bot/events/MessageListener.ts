@@ -1,12 +1,8 @@
 import { Message } from "discord.js";
 import DiscordBot from "../DiscordBot";
+import { DiscordEvents } from "../DiscordEventEmiter";
 
-export const name = "messageCreate";
-export const once = false;
+export const type = DiscordEvents.MESSAGE_CREATE;
 export const execute = async (message: Message, client: DiscordBot) => {
-
-    if (message.author.bot) return;
-    if (message.content.includes("test")) return message.channel.send({
-        
-    });
+    client.logger?.info(`Message received: ${message.content}`);
 }

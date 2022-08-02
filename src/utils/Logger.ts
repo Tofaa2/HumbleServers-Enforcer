@@ -2,16 +2,20 @@ import { EmbedBuilder, TextChannel} from 'discord.js'
 
 class Logger {
     
-    private logChannel: TextChannel;
+    private logChannel: TextChannel | undefined;
 
-    constructor(logChannel: TextChannel) {
-        this.logChannel = logChannel;
+    constructor() {
     }
+
+    setLogChannel(channel: TextChannel) {
+        this.logChannel = channel;
+    }
+
 
     info (info: any) {
         const date = new Date().toLocaleString()
-
         console.log(`[${date}] [INFO] ${info}`)
+        if (!this.logChannel) return; 
 
         const embed = new EmbedBuilder()
         .setColor('Green')
@@ -25,8 +29,8 @@ class Logger {
 
     warn(warning: any) {
         const date = new Date().toLocaleString()
-
         console.log(`[${date}] [WARN] ${warning}`)
+        if (!this.logChannel) return; 
 
         const embed = new EmbedBuilder()
         .setColor('Yellow')
@@ -40,8 +44,8 @@ class Logger {
 
     error(error: any) {
         const date = new Date().toLocaleString()
-
         console.log(`[${date}] [ERROR] ${error}`)
+        if (!this.logChannel) return; 
 
         const embed = new EmbedBuilder()
         .setColor('Red')
