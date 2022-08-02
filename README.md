@@ -1,11 +1,12 @@
 # HumbleServers Enforcer
  The base discord bot used for tickets in HumbleServers
 
-# Table of contents
-    - [Installation](#installation)
-    - [Configuration](#configuration)
-    - [How To Contribute](#how-to-contribute)
-    - [License](#license)
+## Table of Contents
+
+- [About](#installation)
+- [Configuration](#configuration)
+- [Contributing](#how-to-contribute)
+- [License](#license)
 
 # Installation (Requires NodeJS 16+) <a name = installation>
 > * Clone the repo
