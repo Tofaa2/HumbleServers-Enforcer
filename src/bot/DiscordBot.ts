@@ -16,7 +16,21 @@ class DiscordBot extends Client{
     public logger: Logger = new Logger();
 
     constructor() {
-        super({intents: 32767});
+        super({
+            intents: [
+                "GuildMessages",
+                "Guilds",
+                "GuildPresences",
+                "GuildVoiceStates",
+                "GuildMembers",
+                "GuildIntegrations",
+                "MessageContent"
+            ],
+            allowedMentions: {
+                repliedUser: false
+            }
+
+        });
         this.login(token);  
 
         this.on("ready", () => {

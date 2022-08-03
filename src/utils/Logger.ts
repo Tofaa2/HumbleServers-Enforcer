@@ -56,9 +56,6 @@ class Logger {
             embeds: [embed]
         })
     }
-
-
-
 }
 
 export default Logger;
