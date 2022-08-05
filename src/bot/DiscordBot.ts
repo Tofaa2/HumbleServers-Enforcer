@@ -1,15 +1,17 @@
-import { Channel, Client, Collection, Guild, TextChannel } from "discord.js";
+import { ButtonInteraction, Channel, Client, Collection, Guild, TextChannel } from "discord.js";
 import fs from "fs";
 import { token } from "../token";
 import Logger from "../utils/Logger";
 import * as configuration from "./configuration.json" 
 import * as path from "path";
 import DiscordEventEmiter from "./DiscordEventEmiter";
+import DiscordTicketManager from "./DiscordTicketManager";
 
 class DiscordBot extends Client{
 
     public commands = new Collection();
     public eventHandler: DiscordEventEmiter = new DiscordEventEmiter(this);
+    public ticketManager: DiscordTicketManager | undefined;
     public config = configuration;
     public guild: Guild | undefined;
     public logChannel: TextChannel | undefined;
@@ -51,7 +53,13 @@ class DiscordBot extends Client{
                 allListeners.push(event.type);
             })
             this.logger.info(`Loaded ${allListeners.length} listeners: ${allListeners.join(", ")}`);
+            this.ticketManager = new DiscordTicketManager(this);
         });
+
+        this.on('interactionCreate', async (interaction) => {
+            if (!interaction.isButton) return;
+            this.ticketManager?.handleSpanishTicketRequest(interaction as ButtonInteraction);
+        })
     }
 
 

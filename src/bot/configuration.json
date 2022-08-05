@@ -1,5 +1,6 @@
 {
     "guild_id": "997399147919441990",
     "log_channel_id": "1004317066867789854",
-    "suggestions_channel_id": "123456789012345678"
+    "suggestions_channel_id": "123456789012345678",
+    "ticket_message_channel_id": "1005090679363469312"
 }
